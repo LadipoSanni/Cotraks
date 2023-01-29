@@ -11,13 +11,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.time.LocalDateTime;
+
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({CtsException.class})
     protected ResponseEntity<?> handleConflict(
             CtsException ex, WebRequest request) {
-        ApiError apiError = new ApiError((HttpServletRequest) request);
+        ApiError apiError = new ApiError(LocalDateTime.now(),"400","Bad Request", HttpServletRequest.BASIC_AUTH  );
         apiError.setStatus("Failure");
         apiError.setMessage(ex.getMessage());
         String bodyOfResponse = apiError.toString();

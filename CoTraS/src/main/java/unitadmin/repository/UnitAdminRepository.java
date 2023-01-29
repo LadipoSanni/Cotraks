@@ -8,5 +8,7 @@ import java.util.Optional;
 public interface UnitAdminRepository extends JpaRepository<UnitAdmin, Long> {
     Optional<UnitAdmin> findByEmail(String email);
 
-    static boolean existsByEmail(String email);
+    static boolean existsByEmail(String email) {
+        return false;
+    }
 }
